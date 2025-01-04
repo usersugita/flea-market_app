@@ -1,0 +1,118 @@
+body{
+    width: 100%;
+    margin: auto;
+
+}
+.item{
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    margin-top: 50px;
+}
+.item__image{
+    width:50% ;
+}
+.item__image img{
+    width: 60%;
+    height:40vh;
+    margin: 40px;   
+}
+.item__content{
+    width: 25%;
+}
+.item__content-name span{
+font-size: 25px;
+}
+.item__content-like{
+    display: flex; 
+    align-items: center;
+}
+.like-item{
+    text-align: center;
+    margin-left: 30px;
+}
+.like button{
+    font-size: 25px;
+    border: none;
+    background: white;
+}
+.like{
+    font-size: 25px;
+   
+}
+.item__content-buy{
+    width: 100%;
+    margin-top: 5px;
+}
+.item__content-buy a{
+   width: 100%;
+   display: block;
+   text-align: center;
+    text-decoration: none;
+    padding: 5px 0;
+    background:#FF5555 ;
+    color: white;
+border-radius: 3px;
+}
+.condition-category,
+.condition-inner,
+.condition-item{
+    display: flex;
+}
+.condition-item{
+   margin-left: 40px;
+}
+.condition-item_category{
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: #ccc;
+    margin-right: 20px;
+}
+.condition-item_information{
+    padding-left: 10px;
+}
+.item__content-comment{
+    width: 100%;
+}
+.comment-log_title{
+color: rgb(120, 120, 120);
+}
+
+.item__content-comment p{
+    display: inline;
+    font-weight: bold;   
+}
+.item__content-comment textarea{
+    width: 100%;
+    display: block;
+}
+.item__content-comment button{
+    width: 100%;
+    margin-top: 20px;       
+    text-align: center;
+    text-decoration: none;
+    padding: 5px 0;
+    background: #FF5555;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.like-button {            
+            border: 1px solid #ccc;           
+            cursor: pointer;
+        }
+
+        /* いいね済みのスタイル */
+        .like-button.liked {
+            background-color: red;
+            color: white;
+            border-color: red;
+            border-radius: 5px;
+        }
+
+        .like-button:hover {
+            opacity: 0.8;
+        }

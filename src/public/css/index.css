@@ -1,0 +1,56 @@
+.area {
+    width: 100%px;
+    margin: auto;
+    padding-top: 50px;
+    flex-wrap: wrap;
+    display: flex;
+    
+}
+.content_class{
+width: 100%px;
+    border-top: 1px solid #ccc;
+}
+.tab_class {
+    width: 15%;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    float: left;
+    order: -1;
+}
+
+input[name="tab_name"] {
+    display: none;
+}
+
+input:checked+.tab_class {
+    color: red;
+}
+
+.content_class {
+    display: none;
+    width: 100%;
+}
+
+input:checked+.tab_class+.content_class {
+    display: block;
+}
+
+.content_class__cards{
+    display: flex;
+flex-wrap: wrap;
+
+}
+.product__cards-link{
+    width: 40vh;
+    margin: 40px;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+.product__card-img img{
+    width: 100%;
+}
+
