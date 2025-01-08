@@ -17,26 +17,32 @@
             <div class="header-utilities">
 
                 <div class="header-utilities__img">
-                    <img src="{{ asset('/storage/images/logo%20(1).svg') }}" alt="">
+                    <a href="/">
+                        <img src="{{ asset('/storage/images/logo%20(1).svg') }}" alt=""></a>
                 </div>
                 <div class="header-utilities__nav">
                     <div class="header-utilities__input">
-                        <form action="" method="GET">
+                        <form action="/search" method="get">
                             @csrf
-                            <input type="text" name="query" placeholder="何をお探しですか？" value="">
-                            <button type="submit">検索</button>
+                            <input type="text" name="keyword" placeholder="何をお探しですか？" value="{{ request('keyword') }}">
+
                         </form>
-                        
-                    </div>
-                    <div class="header-utilities__mypage">
-                        <a class="header-nav__mypage" href="/mypage">マイページ</a>
+
                     </div>
                     <div class="header-utilities__logout">
+                        @if (Auth::check())
                         <form action="/logout" method="post">
                             @csrf
                             <button class="header-nav__button">ログアウト</button>
 
                         </form>
+                        @else
+                        <a class="header-nav__button" href="/login">ログイン</a>
+                        @endif
+
+                    </div>
+                    <div class="header-utilities__mypage">
+                        <a class="header-nav__mypage" href="/mypage">マイページ</a>
                     </div>
                     <div class="header-utilities__link">
                         <a class="header-nav__link" href="/sell">出品</a>

@@ -15,7 +15,8 @@
     <header class="header">
         <div class="header__inner">
             <div class="header-utilities">
-                <img src="{{ asset('/storage/images/logo%20(1).svg') }}" alt="">
+                <a href="/">
+                    <img src="{{ asset('/storage/images/logo%20(1).svg') }}" alt=""></a>
                 <!--<nav>
                      <ul class="header-nav"> 
                 <li class="header-nav__item">

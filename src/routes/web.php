@@ -13,18 +13,20 @@ use App\Http\Controllers\MarketController;
 |
 */
 
+Route::get('/', [MarketController::class, 'index']);
+Route::get('/search', [MarketController::class, 'search']);
+Route::post('/', [MarketController::class, 'profile']);
+Route::get('/item/{id}', [MarketController::class, 'item']);
+Route::post('/item/{id}', [MarketController::class, 'itemstore']);
+Route::post('/item/{id}/like', [MarketController::class, 'itemstore'])->name('item.like');
+Route::post('/item/{id}/comment', [MarketController::class, 'comment'])->name('item.comment');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [MarketController::class, 'index']);
-    Route::post('/', [MarketController::class, 'profile']);
-    Route::get('/item/{id}', [MarketController::class, 'item']);
-    Route::post('/item/{id}', [MarketController::class, 'itemstore']);
-    Route::post('/item/{id}/like', [MarketController::class, 'itemstore'])->name('item.like');
-    Route::post('/item/{id}/comment', [MarketController::class, 'comment'])->name('item.comment');
+    
     Route::get('/profile', function () {
         return view('profile'); // 新規登録後のページ
     })->name('profile');
-
+    Route::post('/profile', [MarketController::class, 'uploadImage']);
     Route::get('/sell', [MarketController::class, 'sell']);
     Route::get('/mypage', [MarketController::class, 'mypage']);
 });

@@ -10,7 +10,7 @@
     <input type="radio" name="tab_name" id="tab1" checked>
     <label class="tab_class" for="tab1">おすすめ</label>
     <div class="content_class">
-        <div class="content_class__cards">
+        <div class="content_class__cards">            
             @foreach ($products as $product)
             <a class="product__cards-link" href="item/{{$product->id}}">
                 <div class="product__card">
@@ -19,7 +19,6 @@
                     </div>
                     <div class="product__card-item">
                         <p> {{$product->name}}</p>
-
                     </div>
                 </div>
             </a>

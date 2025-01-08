@@ -7,7 +7,8 @@
 @section('content')
 <div class="mypage">
     <div class="mypage_header">
-        <h1>ユーザー名</h1>
+        <h1>{{ $profile->user->name }}</h1>
+        <img src="{{ asset('storage/' . $profile->image) }}" alt="プロフィール画像" style="max-width: 150px;">
     </div>
     <div class="area">
         <input type="radio" name="tab_name" id="tab1" checked>

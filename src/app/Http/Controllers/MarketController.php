@@ -12,7 +12,7 @@ use App\Models\Comment;
 use App\Models\Category;
 class MarketController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         
         // セッションに登録リダイレクトフラグがあれば、リダイレクト先を変更
@@ -21,8 +21,8 @@ class MarketController extends Controller
                          
             return redirect('/profile'); // フラッシュデータとして渡す // 新規登録後のページ
         }
-        $products = Product::all();   
-        
+        $products = Product::all();
+           
         return view('index' ,compact('products')); 
     }
     
@@ -39,7 +39,8 @@ class MarketController extends Controller
         // プロフィールデータの準備
         $profiles = [
             'user_id' => Auth::id(),
-            'image' => $request->hasFile('image') ? $request->file('image')->store('profile_images', 'public') : null,
+            'image' => $request->image,
+            // 'image' => $request->hasFile('image') ? $request->file('image')->store('profile_images', 'public') : null,
             'postcode' => $request->postcode,
             'address' => $request->address,
             'building' => $request->building ?? '未設定',
@@ -47,6 +48,19 @@ class MarketController extends Controller
         // データベースに保存
         Profile::create($profiles);
         return redirect('/');
+    }
+    public function uploadImage(Request $request)
+    {
+        // バリデーション
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048', // JPEG, PNG形式のみ
+        ]);
+
+        // ファイルを保存
+        $path = $request->file('image')->store('uploads', 'public');
+
+        // 保存した画像のパスをセッションに保存
+        return redirect()->route('profile')->with('imagePath', $path);
     }
     public function item($id)
     {
@@ -89,8 +103,10 @@ class MarketController extends Controller
         }
     public function mypage()
     {
+        $userId = Auth::id();
         $products = Product::all();
-        return view('mypage', compact('products'));
+        $profile = Profile::with('user')->where('user_id', $userId)->first();
+        return view('mypage', compact('products', 'profile'));
     }
 
 
@@ -114,6 +130,28 @@ class MarketController extends Controller
 
         return redirect();
     }
+    public function search(Request $request)
+    {
+        // 検索クエリを生成
+        $query = $this->getSearchQuery($request);
 
-    
+        // 検索結果を取得
+        $products = $query->get();
+
+        // ビューにデータを渡す
+        return view('index', compact('products', 'request', ));
+    }
+
+    private function getSearchQuery($request)
+    {
+        // Productクラスのクエリビルダーを作成
+        $query = Product::query();
+
+        // キーワードが入力されている場合は条件を追加
+        if (!empty($request->keyword)) {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+
+        return $query;
+    }
 }

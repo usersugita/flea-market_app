@@ -75,8 +75,10 @@
             </div>
             <div class="item__content-comment">
                 <div class="comment-log">
+
                     <h3 class="comment-log_title">コメント（ {{$products->comments->count() }}）</h3>
                 </div>
+
                 @foreach ($products->comments as $comment)
                 <div>
                     <strong>{{ $comment->user->name }}</strong>:
@@ -85,10 +87,17 @@
                 @endforeach
                 <form action="{{ route('item.comment', ['id' => $products->id]) }}" method="post">
                     @csrf
+
                     <p>商品へのコメント</p>
                     <input type="hidden" name="product_id" value="{{ $products->id }}">
                     <textarea rows="6" name="comment" id=""></textarea>
+
+
+                    @if (Auth::check())
                     <button type="submit">コメントを送信する</button>
+                    @else
+                    <p>ログインしていません。コメント機能を利用するにはログインしてください。</p>
+                    @endif
                 </form>
 
 

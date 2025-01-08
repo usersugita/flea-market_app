@@ -18,7 +18,7 @@ body{
     margin: 40px;   
 }
 .item__content{
-    width: 25%;
+    width: 35%;
 }
 .item__content-name span{
 font-size: 25px;
@@ -67,6 +67,7 @@ border-radius: 3px;
     border-radius: 20px;
     background: #ccc;
     margin-right: 20px;
+    font-size: 13px;
 }
 .condition-item_information{
     padding-left: 10px;
