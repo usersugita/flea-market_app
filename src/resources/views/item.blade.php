@@ -9,12 +9,12 @@
 <body>
     <div class="item">
         <div class="item__image">
-            <img src="{{($products->image)}}" alt="">
+            <img src="{{ filter_var($products->image, FILTER_VALIDATE_URL) ? $products->image : asset('storage/' . $products->image) }}" alt="logo">
         </div>
         <div class="item__content">
             <div class="item__content-name">
                 <h1>{{($products->name)}}</h1>
-                ￥<span>{{($products->price)}}</span>(税込み)
+                <span>￥{{ number_format($products->price) }}</span>(税込み)
             </div>
             <div class="item__content-like">
                 <div class="like-item">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="item__content-buy">
-                <a href="http://">購入手続きへ</a>
+                <a href="/purchase/{{($products->id)}}">購入手続きへ</a>
             </div>
             <div class="item__content-description">
                 <h2>商品説明</h2>
@@ -74,21 +74,18 @@
 
             </div>
             <div class="item__content-comment">
-                <div class="comment-log">
-
-                    <h3 class="comment-log_title">コメント（ {{$products->comments->count() }}）</h3>
+                <div class="comment-log_title">
+                    コメント（{{$products->comments->count() }}）
                 </div>
-
                 @foreach ($products->comments as $comment)
-                <div>
-                    <strong>{{ $comment->user->name }}</strong>:
-                    <p>{{ $comment->comment }}</p>
+                <div class="comment-log">
+                    {{ $comment->user->name }} :{{ $comment->comment }}
                 </div>
                 @endforeach
                 <form action="{{ route('item.comment', ['id' => $products->id]) }}" method="post">
                     @csrf
 
-                    <p>商品へのコメント</p>
+                    <h3>商品へのコメント</h3>
                     <input type="hidden" name="product_id" value="{{ $products->id }}">
                     <textarea rows="6" name="comment" id=""></textarea>
 

@@ -29,4 +29,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile', [MarketController::class, 'uploadImage']);
     Route::get('/sell', [MarketController::class, 'sell']);
     Route::get('/mypage', [MarketController::class, 'mypage']);
+    Route::post('/mypage/order', [MarketController::class, 'order']);
+    Route::get('/purchase/{id}', [MarketController::class, 'purchase'])->name('purchase');
+    // 住所変更ページの表示
+    Route::get('/purchase/address/{id}', [MarketController::class, 'address']);
+    // 住所変更処理
+    Route::post('/purchase/address/{id}', [MarketController::class, 'addresschange']);
+    Route::get('/mypage/profile', [MarketController::class, 'myprofile']);
+    Route::post('/mypage/profile', [MarketController::class, 'updateImage']);
+    Route::post('/mypage/profile/updateprofile', [MarketController::class, 'updateProfile']);
+    Route::post('/sell', [MarketController::class, 'uploadImage']);
+    Route::post('/listing', [MarketController::class, 'listing']);
+   
+   
 });

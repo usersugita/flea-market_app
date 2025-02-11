@@ -18,7 +18,7 @@
 
                 <div class="header-utilities__img">
                     <a href="/">
-                        <img src="{{ asset('/storage/images/logo%20(1).svg') }}" alt=""></a>
+                        <img src="{{ asset('/storage/images/default/logo (2).svg') }}" alt=""></a>
                 </div>
                 <div class="header-utilities__nav">
                     <div class="header-utilities__input">
