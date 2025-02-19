@@ -13,6 +13,10 @@ use App\Models\Category;
 
 use App\Models\Order;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\CommentRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
+
 class MarketController extends Controller
 {
     public function index(Request $request)
@@ -33,7 +37,7 @@ class MarketController extends Controller
             // ログインしていない場合は、空のコレクションを返す
             $likes = collect();
             $orders = collect();
-        }  
+        }
         return view('index' ,compact('products', 'likes', 'orders')); 
     }
     
@@ -68,7 +72,10 @@ class MarketController extends Controller
     {
         $products = Product::with('categories')->findOrFail($id);
         $isLiked = $products->likes()->where('user_id', auth()->id())->exists();
-        return view('item', compact('products','isLiked'));
+        $isPurchased = Order::where('user_id', Auth::id())
+            ->where('product_id', $id)
+            ->exists();
+        return view('item', compact('products','isLiked', 'isPurchased'));
         
     }
     public function itemstore(Request $request)
@@ -94,7 +101,7 @@ class MarketController extends Controller
             return redirect()->back()->with('success', 'いいねしました');
         }
     }
-    public function comment(Request $request)
+    public function comment(CommentRequest $request)
     {
             Comment::create([
                 'comment' => $request->input('comment'),

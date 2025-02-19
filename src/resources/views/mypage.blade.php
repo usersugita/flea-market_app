@@ -25,6 +25,7 @@
         <div class="content_class">
             <div class="content_class__cards">
                 @foreach ($products as $product)
+                @if (Auth::id() == $product->user_id)
                 <a class="product__cards-link" href="item/{{$product->id}}">
                     <div class="product__card">
                         <div class="product__card-img">
@@ -32,10 +33,10 @@
                         </div>
                         <div class="product__card-item">
                             <p> {{$product->name}}</p>
-
                         </div>
                     </div>
                 </a>
+                @endif
                 @endforeach
             </div>
         </div>

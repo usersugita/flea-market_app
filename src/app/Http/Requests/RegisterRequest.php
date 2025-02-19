@@ -27,16 +27,19 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'login' => ['required'],
         ];
     }
     public function messages()
     {
         // カスタムエラーメッセージ
         return [
-            'name.required' => '名前は必須です。',
-            'email.required' => 'メールアドレスは必須です。',
-            'password.required' => 'パスワードは必須です。',
-            'password.confirmed' => 'パスワードが一致しません。',
+            'name.required' => 'お名前を入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'password.required' => 'パスワードを入力してください',
+            'password.min' => 'パスワードは8文字以上で入力してください',
+            'password.confirmed' => 'パスワードと一致しません',
+            'login.required' => 'メールアドレス又はお名前を入力してください',
         ];
     }
 }

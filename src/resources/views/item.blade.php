@@ -42,7 +42,14 @@
                 </div>
             </div>
             <div class="item__content-buy">
-                <a href="/purchase/{{($products->id)}}">購入手続きへ</a>
+                @if ($isPurchased)
+                <!-- 購入済みの場合、ボタンを無効化 -->
+                <button disabled>購入済み</button>
+                @else
+                <!-- 購入可能な場合、購入リンクを表示 -->
+                <a href="/purchase/{{ $products->id }}" class="btn btn-primary">購入手続きへ</a>
+                @endif
+
             </div>
             <div class="item__content-description">
                 <h2>商品説明</h2>
@@ -88,8 +95,11 @@
                     <h3>商品へのコメント</h3>
                     <input type="hidden" name="product_id" value="{{ $products->id }}">
                     <textarea rows="6" name="comment" id=""></textarea>
-
-
+                    <div class="error">
+                        @error('comment')
+                        {{ $message }}
+                        @enderror
+                    </div>
                     @if (Auth::check())
                     <button type="submit">コメントを送信する</button>
                     @else

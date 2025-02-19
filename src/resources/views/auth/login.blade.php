@@ -17,14 +17,14 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="login" id="login" required autofocus>
+                    <input type="text" name="login" id="login" value="{{ old('login') }}">
                     <!-- <input type="email" name="email" value="{{ old('email') }}" />  -->
                 </div>
                 <div class="form__error">
                     @error('login')
                     {{ $message }}
                     @enderror
-                    
+
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     @error('password')
                     {{ $message }}
                     @enderror
-                    
+
                 </div>
             </div>
         </div>

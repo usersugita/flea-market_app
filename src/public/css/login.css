@@ -44,3 +44,6 @@
     text-decoration: none;
     color: #0073CC;
 }
+.form__error {
+    color: red;
+}

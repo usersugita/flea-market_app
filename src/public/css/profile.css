@@ -73,6 +73,8 @@
      border-radius: 4px;
      cursor: pointer;
  }
-
+.form__error{
+    color: red;
+}
  
  
