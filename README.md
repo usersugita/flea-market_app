@@ -2,7 +2,7 @@
 
 Dockerビルド  
 
-1.git clone https://github.com/usersugita/test-contactform.git  
+1.git clone https://github.com/usersugita/flea-market_app.git  
 2.docker-composer up -d --build  
 ＊MYSQLは、OSによって起動しない場合がありますのでそれぞれのPCに合わせて docker-compose.yml ファイルを編集してください。  
 
@@ -21,6 +21,7 @@ Laravel環境構築
 ・Laravel 8.83.27  
 ・Mysql 8.0.26
 ## ER図  
+![スクリーンショット 2025-02-23 100526](https://github.com/user-attachments/assets/f5e18373-6df7-42ee-96dd-4948d3d60918)
 
 ## URL  
 ・開発環境：http://localhost/  
