@@ -3,7 +3,7 @@
 Dockerビルド  
 
 1.git clone https://github.com/usersugita/flea-market_app.git  
-2.docker-composer up -d --build  
+2.docker-compose up -d --build  
 ＊MYSQLは、OSによって起動しない場合がありますのでそれぞれのPCに合わせて docker-compose.yml ファイルを編集してください。  
 
 Laravel環境構築  
