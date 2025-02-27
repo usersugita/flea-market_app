@@ -21,15 +21,7 @@ Laravel環境構築
 ・Laravel 8.83.27  
 ・Mysql 8.0.26
 ## ER図  
-![スクリーンショット 2024-09-18 130737](https://github.com/user-attachments/assets/82477d32-369e-4e7c-8eac-ec6d486ea3b7)  
 
 ## URL  
 ・開発環境：http://localhost/  
 ・phpMyadmin：http://localhost:8080/  
-
-  ### 分からなかった所  
-  "/" radioボタンのバリデーション設定    
-  "/admin" エクスポート機能  
-  "/admin" 詳細（モーダルウィンドウ）機能  
-  category_id　モデルリレーション  
-  Fortify 設定

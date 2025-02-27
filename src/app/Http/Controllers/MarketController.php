@@ -16,7 +16,7 @@ use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
-
+use App\Http\Requests\AddressRequest;
 class MarketController extends Controller
 {
     public function index(Request $request)
@@ -148,13 +148,17 @@ class MarketController extends Controller
     {
         // 検索クエリを生成
         $query = $this->getSearchQuery($request);
-
         // 検索結果を取得
         $products = $query->get();
-
+        // ログインユーザー情報を取得（ログインしていない場合は `null`）
+        $user = auth()->user();
+        // ログインしている場合のみ `orders` を取得
+        $orders = $user ? Order::with('product')->where('user_id', $user->id)->get() : collect([]);
+        $likes = $user ?  Like::with('product')->where('user_id', $user->id)->get() : collect([]);
         // ビューにデータを渡す
-        return view('index', compact('products', 'request', ));
+        return view('index', compact('products', 'request', 'orders','likes'));
     }
+
 
     private function getSearchQuery($request)
     {
@@ -192,10 +196,11 @@ class MarketController extends Controller
   
     public function address(Request $request,$id)
     {
-        
-        return view('address', compact('id'));
+        $user = auth()->user();
+        $profile = Profile::where('user_id', $user->id)->firstOrFail();
+        return view('address', compact('id', 'profile'));
     }
-    public function addresschange(ProfileRequest $request,$id)
+    public function addresschange(AddressRequest $request,$id)
     {
         $user = auth()->user();
         $profile = Profile::where('user_id', $user->id)->firstOrFail();
@@ -206,8 +211,7 @@ class MarketController extends Controller
             'building' => $request->building,
         ]);
 
-        return redirect()->route('purchase', ['id' => $id])
-            ;
+        return redirect("/purchase/$id");
     }
     public function updateImage(Request $request)
     {
@@ -226,11 +230,11 @@ class MarketController extends Controller
     }
     public function updateProfile(ProfileRequest $request)
     {
-        $user = auth()->user(); // ログイン中のユーザー
+        $user = User::findOrFail(auth()->id());
         $profile = Profile::where('user_id', $user->id)->firstOrFail(); // ログインユーザーの
-        // $user->update([
-            // 'name' => $request->name,
-        // ]);      
+        $user->update([
+            'name' => $request->name, // フォームから送られてきた `name` を保存
+        ]);    
         $profiles = [
             'image' => $request->image,              
             'postcode' => $request->postcode,

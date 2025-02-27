@@ -34,3 +34,6 @@
     font-size: 20px;
     cursor: pointer;
 }
+.form__error{
+    color: red;
+}

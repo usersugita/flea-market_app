@@ -37,8 +37,7 @@
     </div>
     <form class="form" action="/mypage/profile/updateprofile" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="image"
-            value="{{ session('imagePath') ? session('imagePath') : 'images/default/154620.png' }}">
+        <input type="hidden" name="image" value="{{ session('imagePath') ?? $profile->image }}">
 
         <div class="form__group">
             <div class="form__group-title">
